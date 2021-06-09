@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySerialization", "BinarySerialization\BinarySerialization.csproj", "{0C934000-4525-4640-A649-F22889DC34A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySerializationTests", "BinarySerializationTests\BinarySerializationTests.csproj", "{5D84A340-B5FF-4EFA-8D7A-29DBC8FEEDE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "TestConsoleApplication\TestConsoleApplication.csproj", "{CF1A6753-6F30-4BEC-8E42-33D8C1A1BB4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C934000-4525-4640-A649-F22889DC34A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C934000-4525-4640-A649-F22889DC34A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C934000-4525-4640-A649-F22889DC34A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C934000-4525-4640-A649-F22889DC34A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D84A340-B5FF-4EFA-8D7A-29DBC8FEEDE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D84A340-B5FF-4EFA-8D7A-29DBC8FEEDE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D84A340-B5FF-4EFA-8D7A-29DBC8FEEDE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D84A340-B5FF-4EFA-8D7A-29DBC8FEEDE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF1A6753-6F30-4BEC-8E42-33D8C1A1BB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF1A6753-6F30-4BEC-8E42-33D8C1A1BB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF1A6753-6F30-4BEC-8E42-33D8C1A1BB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF1A6753-6F30-4BEC-8E42-33D8C1A1BB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
