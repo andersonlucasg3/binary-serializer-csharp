@@ -5,9 +5,9 @@ using System.IO;
 using BinarySerializationTests.Models;
 using BinarySerializer;
 
-namespace ConsoleApplication1
+namespace ConsoleApplication
 {
-    internal class Program
+    internal static class Program
     {
         public static void Main()
         {

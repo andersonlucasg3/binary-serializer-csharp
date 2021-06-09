@@ -4,9 +4,9 @@ using BinarySerializer.Mapping.Types;
 
 namespace BinarySerializer.Deserializers
 {
-    public static class ArrayDeserializer
+    internal static class ArrayDeserializer
     {
-        public static Array Deserialize(ArrayMap map, byte[] buffer, Stream stream)
+        internal static Array Deserialize(ArrayMap map, byte[] buffer, Stream stream)
         {
             int length = ByteStream.ReadBytes<int>(buffer, stream);
             

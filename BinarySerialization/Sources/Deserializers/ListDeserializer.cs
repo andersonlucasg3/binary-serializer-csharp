@@ -7,9 +7,9 @@ using BinarySerializer.Pool;
 
 namespace BinarySerializer.Deserializers
 {
-    public static class ListDeserializer
+    internal static class ListDeserializer
     {
-        public static object Deserialize(ListMap listMap, byte[] buffer, Stream stream)
+        internal static object Deserialize(ListMap listMap, byte[] buffer, Stream stream)
         {
             int count = ByteStream.ReadBytes<int>(buffer, stream);
 
@@ -23,7 +23,7 @@ namespace BinarySerializer.Deserializers
             return list;
         }
 
-        public static object Deserialize(SetMap setMap, byte[] buffer, Stream stream)
+        internal static object Deserialize(SetMap setMap, byte[] buffer, Stream stream)
         {
             object instance = Activator.CreateInstance(setMap.type);
             DeserializeDynamic(instance, setMap, buffer, stream);

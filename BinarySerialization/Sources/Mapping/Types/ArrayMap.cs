@@ -1,12 +1,11 @@
 ﻿using System;
-using JetBrains.Annotations;
 
 namespace BinarySerializer.Mapping.Types
 {
-    public readonly struct ArrayMap : IEnumerableMap
+    internal readonly struct ArrayMap : IEnumerableMap
     {
-        [UsedImplicitly] public Type type { get; }
-        [UsedImplicitly] public IMap elementMap { get; }
+        public Type type { get; }
+        public IMap elementMap { get; }
 
         public ArrayMap(Type arrayType)
         {

@@ -2,7 +2,6 @@
 using System.Reflection;
 using BinarySerializer.Extensions;
 using BinarySerializer.Pool;
-using JetBrains.Annotations;
 
 namespace BinarySerializer.Mapping.Types
 {
@@ -12,16 +11,14 @@ namespace BinarySerializer.Mapping.Types
         
         private static readonly Predicate<FieldInfo> _filterFieldsFunc = FilterFieldsFunc;
 
-        [UsedImplicitly] public Type type { get; }
-        [UsedImplicitly] public readonly FieldMap[] fields;
+        public Type type { get; }
+        public readonly FieldMap[] fields;
 
-        [UsedImplicitly] public readonly bool isStruct;
-        
         public ClassMap(Type type)
         {
             this.type = type;
 
-            isStruct = type.IsValueType && !type.IsPrimitive;
+            var isStruct = type.IsValueType && !type.IsPrimitive;
             
             if (!type.IsClass && !isStruct && !type.IsInterface) throw new ArgumentException("Expected class object", nameof(type));
 
@@ -56,8 +53,8 @@ namespace BinarySerializer.Mapping.Types
 
         public readonly struct FieldMap
         {
-            [UsedImplicitly] public readonly FieldInfo info;
-            [UsedImplicitly] public readonly IMap map;
+            private readonly FieldInfo info;
+            public readonly IMap map;
 
             public FieldMap(FieldInfo info)
             {
@@ -74,6 +71,14 @@ namespace BinarySerializer.Mapping.Types
             {
                 if (obj is FieldMap other) return Equals(other);
                 return base.Equals(obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((info != null ? info.GetHashCode() : 0) * 397) ^ (map != null ? map.GetHashCode() : 0);
+                }
             }
 
             public override string ToString() => $"{{ Map: {map}, FieldInfo: {info} }}";

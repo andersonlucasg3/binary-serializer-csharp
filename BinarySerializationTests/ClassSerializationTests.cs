@@ -25,14 +25,13 @@ namespace BinarySerializationTests
 
                 ms.Position = 0;
                 
-                instance = null;
-                Serializer.Serialize(instance, ms);
+                Serializer.Serialize(null, ms);
 
                 ms.Position = 0;
 
                 other = Deserializer.Deserialize(ms);
                 
-                Assert.AreEqual(instance, other);
+                Assert.AreEqual(null, other);
             }
         }
 

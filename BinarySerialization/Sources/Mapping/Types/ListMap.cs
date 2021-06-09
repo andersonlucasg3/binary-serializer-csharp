@@ -1,14 +1,13 @@
 ﻿using System;
 using BinarySerializer.Extensions;
 using BinarySerializer.Helping;
-using JetBrains.Annotations;
 
 namespace BinarySerializer.Mapping.Types
 {
     public readonly struct ListMap : IEnumerableMap
     {
-        [UsedImplicitly] public Type type { get; }
-        [UsedImplicitly] public IMap elementMap { get; }
+        public Type type { get; }
+        public IMap elementMap { get; }
 
         public ListMap(Type listType)
         {

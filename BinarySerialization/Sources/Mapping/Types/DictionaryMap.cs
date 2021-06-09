@@ -1,15 +1,14 @@
 ﻿using System;
 using BinarySerializer.Extensions;
 using BinarySerializer.Helping;
-using JetBrains.Annotations;
 
 namespace BinarySerializer.Mapping.Types
 {
     public readonly struct DictionaryMap : IMap
     {
-        [UsedImplicitly] public Type type { get; }
-        [UsedImplicitly] public readonly IMap keyMap;
-        [UsedImplicitly] public readonly IMap valueMap;
+        public Type type { get; }
+        public readonly IMap keyMap;
+        public readonly IMap valueMap;
 
         public DictionaryMap(Type type)
         {

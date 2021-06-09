@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace BinarySerializer.Logging
 {
-    public static class Logger
+    internal static class Logger
     {
-        public static void Log(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0) 
+        internal static void Log(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0) 
             => InternalLog(message, memberName, filePath, lineNumber);
 
         private static void InternalLog(string message, string memberName, string filePath, int lineNumber)

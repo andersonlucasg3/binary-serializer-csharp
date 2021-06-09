@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Reflection;
 using BinarySerializer.Helping;
-using JetBrains.Annotations;
 
 namespace BinarySerializer.Mapping.Types
 {
     public readonly struct SetMap : IEnumerableMap
     {
-        [UsedImplicitly] public Type type { get; }
-        [UsedImplicitly] public IMap elementMap { get; }
-        [UsedImplicitly] public readonly PropertyInfo countProperty;
-        [UsedImplicitly] public readonly MethodInfo addMethod;
+        public Type type { get; }
+        public IMap elementMap { get; }
+        public readonly PropertyInfo countProperty;
 
         public SetMap(Type type)
         {
@@ -21,7 +19,6 @@ namespace BinarySerializer.Mapping.Types
             elementMap = Mapper.Map(genericArguments[0], type);
 
             countProperty = type.GetProperty("Count");
-            addMethod = type.GetMethod("Add");
         }
 
         public override string ToString()

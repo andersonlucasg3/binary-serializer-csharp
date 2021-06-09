@@ -5,9 +5,9 @@ using BinarySerializer.Mapping.Types;
 
 namespace BinarySerializer.Deserializers
 {
-    public static class DictionaryDeserializer
+    internal static class DictionaryDeserializer
     {
-        public static object Deserialize(DictionaryMap dictionaryMap, byte[] buffer, Stream stream)
+        internal static object Deserialize(DictionaryMap dictionaryMap, byte[] buffer, Stream stream)
         {
             int count = ByteStream.ReadBytes<int>(buffer, stream);
 

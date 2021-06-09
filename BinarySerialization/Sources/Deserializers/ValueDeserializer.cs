@@ -5,9 +5,9 @@ using BinarySerializer.Mapping.Types;
 
 namespace BinarySerializer.Deserializers
 {
-    public static class ValueDeserializer
+    internal static class ValueDeserializer
     {
-        public static object Deserialize(ValueMap valueMap, byte[] buffer, Stream stream)
+        internal static object Deserialize(ValueMap valueMap, byte[] buffer, Stream stream)
         {
             if (valueMap.isNullable && ByteStream.ReadBytes<bool>(buffer, stream)) return null;
             

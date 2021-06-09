@@ -4,9 +4,9 @@ using BinarySerializer.Mapping.Types;
 
 namespace BinarySerializer.Deserializers
 {
-    public static class ClassDeserializer
+    internal static class ClassDeserializer
     {
-        public static object Deserialize(ClassMap classMap, byte[] buffer, Stream stream)
+        internal static object Deserialize(ClassMap classMap, byte[] buffer, Stream stream)
         {
             object instance = FormatterServices.GetUninitializedObject(classMap.type);
             for (int index = 0; index < classMap.fields.Length; index++)
