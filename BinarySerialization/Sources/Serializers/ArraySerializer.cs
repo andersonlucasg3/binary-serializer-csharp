@@ -6,9 +6,9 @@ using BinarySerializer.Mapping.Types;
 
 namespace BinarySerializer.Serializers
 {
-    public static class ArraySerializer
+    internal static class ArraySerializer
     {
-        public static void Serialize(Array array, ArrayMap map, byte[] buffer, Stream stream)
+        internal static void Serialize(Array array, ArrayMap map, byte[] buffer, Stream stream)
         {
             if (array.IsNull())
             {
