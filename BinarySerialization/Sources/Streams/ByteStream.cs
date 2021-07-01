@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using BinarySerializer.Extensions;
 
@@ -36,11 +37,8 @@ namespace BinarySerializer
         
         public static void WriteBytes<TValue>(TValue value, byte[] buffer, Stream stream) where TValue : unmanaged
         {
-            unsafe
-            {
-                ToBytes(value, buffer, 0);
-                Write(buffer, 0, sizeof(TValue), stream);
-            }
+            int size = ToBytes(value, buffer);
+            Write(buffer, 0, size, stream);
         }
         
         #endregion
@@ -64,13 +62,10 @@ namespace BinarySerializer
             return newBuffer;
         }
 
-        public static TValue ReadBytes<TValue>(byte[] buffer, Stream stream) where TValue : unmanaged
+        public static TValue ReadBytes<TValue>(byte[] buffer, Stream stream)
         {
-            unsafe
-            {
-                Read(buffer, 0, sizeof(TValue), stream);
-                return FromBytes<TValue>(buffer, 0);
-            }
+            Read(buffer, 0, ByteConverter<TValue>.GetSize(), stream);
+            return FromBytes<TValue>(buffer);
         }
 
         #endregion
@@ -83,21 +78,78 @@ namespace BinarySerializer
             while (read < count);
         }
 
-        private static unsafe void ToBytes<TValue>(TValue value, byte[] buffer, int offset) where TValue : unmanaged
+        private static int ToBytes<TValue>(TValue value, byte[] buffer) where TValue : unmanaged
         {
-            if (buffer.IsNull()) throw new ArgumentNullException(nameof(buffer));
-            if (offset < 0 || offset + sizeof(TValue) > buffer.Length) throw new ArgumentOutOfRangeException(nameof(offset));
-            fixed (byte* ptrToStart = buffer) *(TValue*) (ptrToStart + offset) = value;
+            if (buffer.IsNull())
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
+            
+            // ReSharper disable once UseObjectOrCollectionInitializer, NotAccessedVariable
+            ByteConverter<TValue> byteConverter = new ByteConverter<TValue>();
+            byteConverter.buffer = buffer;
+            byteConverter.value = value;
+            return ByteConverter<TValue>.GetSize();
         }
 
-        private static unsafe TValue FromBytes<TValue>(byte[] buffer, int offset) where TValue : unmanaged
+        private static TValue FromBytes<TValue>(byte[] buffer)
         {
-            if (buffer.IsNullOrEmpty()) throw new ArgumentNullException(nameof(buffer));
-            if (offset < 0 || offset + sizeof(TValue) > buffer.Length) throw new ArgumentOutOfRangeException(nameof(offset));
-            fixed (byte* ptrToStart = buffer)
+            if (buffer.IsNullOrEmpty())
             {
-                TValue * ptr = (TValue *) (ptrToStart + offset);
-                return *ptr;
+                throw new ArgumentNullException(nameof(buffer));
+            }
+
+            // ReSharper disable once UseObjectOrCollectionInitializer
+            ByteConverter<TValue> byteConverter = new ByteConverter<TValue>();
+            byteConverter.buffer = buffer;
+            return byteConverter.value;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        private struct ByteConverter<TValue>
+        {
+            [FieldOffset(0)] public byte[] buffer;
+
+            [FieldOffset(0)] public TValue value;
+
+            public static int GetSize()
+            {
+                if (typeof(TValue) == typeof(bool))
+                {
+                    return sizeof(bool);
+                }
+
+                if (typeof(TValue) == typeof(byte))
+                {
+                    return sizeof(byte);
+                }
+
+                if (typeof(TValue) == typeof(short))
+                {
+                    return sizeof(short);
+                }
+
+                if (typeof(TValue) == typeof(int))
+                {
+                    return sizeof(int);
+                }
+
+                if (typeof(TValue) == typeof(long))
+                {
+                    return sizeof(long);
+                }
+
+                if (typeof(TValue) == typeof(float))
+                {
+                    return sizeof(float);
+                }
+
+                if (typeof(TValue) == typeof(double))
+                {
+                    return sizeof(double);
+                }
+
+                throw new ArgumentOutOfRangeException(nameof(TValue), typeof(TValue), "Unexpected type");
             }
         }
     }
