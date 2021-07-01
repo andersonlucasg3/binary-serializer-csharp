@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using System.Threading.Tasks;
 using BinarySerializer.Helping;
 using BinarySerializer.Mapping;
 using BinarySerializer.Mapping.Types;
@@ -15,6 +16,12 @@ namespace BinarySerializer
             byte[] buffer = Helpers.RentBuffer();
             _InternalSerializer.SerializeInternal(obj, buffer, stream);
             Helpers.PayBuffer(buffer);
+        }
+        
+        public static async Task SerializeAsync(object obj, Stream stream)
+        {
+            Serialize(obj, stream);
+            await Task.Yield();
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using BinarySerializer.Deserializers;
 using BinarySerializer.Helping;
 using BinarySerializer.Mapping;
@@ -17,6 +18,11 @@ namespace BinarySerializer
             Helpers.PayBuffer(buffer);
             return instance;
         }
+
+        public static async Task<TResult> DeserializeAsync<TResult>(Stream stream)
+        {
+            return await Task.Run(() => (TResult)Deserialize(stream));
+        } 
     }
 
     internal static class _InternalDeserializer
